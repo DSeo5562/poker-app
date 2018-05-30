@@ -1,4 +1,4 @@
-package com.revature.beans;
+package beans;
 
 import java.io.Serializable;
 
@@ -33,10 +33,10 @@ public class Users implements Serializable{
 		this.isHost = isHost;
 	}
 
-	public Users(int user_Id, GameStates gameStates, String email, String password, String firstName, String lastName,
+	public Users(int userId, GameStates gameStates, String email, String password, String firstName, String lastName,
 			String username, boolean isHost) {
 		super();
-		this.user_Id = user_Id;
+		this.userId = userId;
 		this.gameStates = gameStates;
 		this.email = email;
 		this.password = password;
@@ -55,7 +55,7 @@ public class Users implements Serializable{
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "userSequence")
 	@SequenceGenerator(allocationSize = 1, name = "userSequence", sequenceName = "SQ_USER_PK")
 	@Column(name = "USER_ID")
-	private int user_Id;
+	private int userId;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "GAME_ID")
@@ -79,12 +79,12 @@ public class Users implements Serializable{
 	@Column(name = "ISHOST")
 	private boolean isHost;
 
-	public int getUser_Id() {
-		return user_Id;
+	public int getuserId() {
+		return userId;
 	}
 
-	public void setUser_Id(int user_Id) {
-		this.user_Id = user_Id;
+	public void setuserId(int userId) {
+		this.userId = userId;
 	}
 
 	public GameStates getGameStates() {
@@ -145,7 +145,7 @@ public class Users implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Users [user_Id=" + user_Id + ", gameStates=" + gameStates + ", email=" + email + ", password="
+		return "Users [userId=" + userId + ", gameStates=" + gameStates + ", email=" + email + ", password="
 				+ password + ", firstName=" + firstName + ", lastName=" + lastName + ", username=" + username
 				+ ", isHost=" + isHost + "]";
 	}

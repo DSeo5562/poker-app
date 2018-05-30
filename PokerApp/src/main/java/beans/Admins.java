@@ -1,9 +1,10 @@
-package com.revature.beans;
+package beans;
 
 import java.io.Serializable;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -25,6 +26,8 @@ public class Admins implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 4331543760144852691L;
+	
+	@Id
 	
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "USER_ID")

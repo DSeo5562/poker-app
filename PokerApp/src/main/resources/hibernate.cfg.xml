@@ -24,11 +24,11 @@
 		<!-- create to start from scratch -->
 		<property name="hibernate.hbm2ddl.auto">create</property>
 		<!-- Mapping Tables per the class. -->
-		<mapping class="com.revature.beans.Users"></mapping>
-		<mapping class="com.revature.beans.Admins"></mapping>
-		<mapping class="com.revature.beans.CurrentHands"></mapping>
-		<mapping class="com.revature.beans.GameStates"></mapping>
-		<mapping class="com.revature.beans.Stats"></mapping>
+		<mapping class="beans.Users"></mapping>
+	    <mapping class="beans.Admins"></mapping>
+		<mapping class="beans.CurrentHands"></mapping>
+		<mapping class="beans.GameStates"></mapping>
+		<mapping class="beans.Stats"></mapping>
 	</session-factory>
 </hibernate-configuration>
 

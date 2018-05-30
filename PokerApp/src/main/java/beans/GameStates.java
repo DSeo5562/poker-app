@@ -1,4 +1,4 @@
-package com.revature.beans;
+package beans;
 
 import java.io.Serializable;
 
