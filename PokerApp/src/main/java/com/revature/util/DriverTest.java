@@ -5,6 +5,8 @@ import org.hibernate.Session;
 public class DriverTest {
 
 	public static void main(String[] args) {
+		
+		// Test for DB connection
 		 Session s = HibernateUtil.getSession();
 		 System.out.println(s.getStatistics()); 
 		 System.out.println(s.isOpen());

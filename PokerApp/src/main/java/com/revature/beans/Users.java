@@ -22,7 +22,7 @@ public class Users implements Serializable{
 	}
 
 	public Users(GameStates gameStates, String email, String password, String firstName, String lastName,
-			String username, String isHost) {
+			String username, boolean isHost) {
 		super();
 		this.gameStates = gameStates;
 		this.email = email;
@@ -34,7 +34,7 @@ public class Users implements Serializable{
 	}
 
 	public Users(int user_Id, GameStates gameStates, String email, String password, String firstName, String lastName,
-			String username, String isHost) {
+			String username, boolean isHost) {
 		super();
 		this.user_Id = user_Id;
 		this.gameStates = gameStates;
@@ -77,7 +77,7 @@ public class Users implements Serializable{
 	private String username;
 	
 	@Column(name = "ISHOST")
-	private String isHost;
+	private boolean isHost;
 
 	public int getUser_Id() {
 		return user_Id;
@@ -135,11 +135,11 @@ public class Users implements Serializable{
 		this.username = username;
 	}
 
-	public String getIsHost() {
+	public boolean getIsHost() {
 		return isHost;
 	}
 
-	public void setIsHost(String isHost) {
+	public void setIsHost(boolean isHost) {
 		this.isHost = isHost;
 	}
 
