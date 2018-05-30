@@ -7,9 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
+  message: String = 'Logout Successful';
   constructor() { }
 
   ngOnInit() {
   }
+
+
 
 }
