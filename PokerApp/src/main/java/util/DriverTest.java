@@ -27,6 +27,11 @@ public class DriverTest {
 		int id = ud.addUser(u);
 		System.out.println("User ID: " + id);
 		System.out.println("Game ID: " + gId);
+		
+		int idA = 1;
+
+		Users user = ud.getUserById(idA);
+		System.out.println(user);
 	}
 
 }

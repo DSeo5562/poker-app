@@ -1,5 +1,8 @@
 package dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -16,6 +19,35 @@ public class UsersDaoImpl implements UsersDao {
 		tx.commit();
 		s.close();
 		return result;
+	}
+
+	@Override
+	public Users getUserById(int id) {
+		Session s = HibernateUtil.getSession();
+		Users u = (Users) s.get(Users.class, id);
+		s.close();
+		return u;
+	}
+
+	@Override
+	public List<Users> getUsers() {
+		List<Users> users = new ArrayList<Users>();
+		Session s = HibernateUtil.getSession();
+		users = s.createQuery("from Users").list();
+		s.close();
+		return users;
+	}
+
+	@Override
+	public void updateUser(Users u) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteUser(Users u) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

@@ -5,16 +5,16 @@
 <hibernate-configuration>
 	<session-factory>
 		<!-- AWS RDS -->
-		<!--
 		<property name="hibernate.connection.username">superusers</property>
 		<property name="hibernate.connection.password">p4ssw0rd</property>
 		<property name="hibernate.connection.url">jdbc:oracle:thin:@mydatabase.cpaojdeahbn2.us-east-2.rds.amazonaws.com:1521:orcl</property>
-		-->
 		
 		<!-- local DB -->
+		<!-- 
 		<property name="hibernate.connection.username">SYSTEM</property>
 		<property name="hibernate.connection.password">Magnificent-24</property>
 		<property name="hibernate.connection.url">jdbc:oracle:thin:@localhost:1521:xe</property>
+		 -->
 		
 		<property name="hibernate.connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
 		<!-- this can be useful during development but very noisy in the console -->
@@ -22,7 +22,7 @@
 		<!-- choose whether to create db or update existing ddl -->
 		<!-- update by default -->
 		<!-- create to start from scratch -->
-		<property name="hibernate.hbm2ddl.auto">create</property>
+		<property name="hibernate.hbm2ddl.auto">update</property>
 		<!-- Mapping Tables per the class. -->
 		<mapping class="beans.Users"></mapping>
 	    <mapping class="beans.Admins"></mapping>
