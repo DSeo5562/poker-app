@@ -1,0 +1,48 @@
+
+<div class="container">
+  <div class="row align-items-start">
+    <div class="col">
+      <h3>Wins: {{ wins }}</h3>
+    </div>
+    <div class="col">
+      <h3>Losses: {{ losses }}</h3>
+    </div>
+    <div class="col">
+      <h3>Win/Loss Ratio: {{ ratio }}%</h3>
+    </div>
+  </div>
+    <div class="row align-items-start">
+    <div class="col">
+    </div>
+    <div class="col">
+      <h3>Total Winnings: ${{ winnings }}</h3>
+    </div>
+    <div class="col">
+    </div>
+  </div>
+  <div class="row align-items-center">
+    <div class="col">
+    </div>
+    <div class="col">
+      <div class="card" style="width: 18rem;">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Username: {{username}}</li>
+          <li class="list-group-item">Name: {{ firstname + " " + lastname }}</li>
+          <li class="list-group-item">Email: {{ email }}</li>
+        </ul>
+      </div>
+    </div>
+    <div class="col">
+    </div>
+  </div>
+
+  <div class="row align-items-end fixed-bottom">
+    <div class="col">
+    </div>
+    <div class="col">
+      <button type="button" class="btn btn-danger">Delete Account</button>
+    </div>
+    <div class="col">
+    </div>
+  </div>
+</div>

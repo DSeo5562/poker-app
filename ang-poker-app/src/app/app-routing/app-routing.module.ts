@@ -9,12 +9,14 @@ import { LoginComponent } from '../components/login/login.component';
 import { NavbarComponent } from '../components/navbar/navbar.component';
 import { HomepageComponent } from '../components/homepage/homepage.component';
 
+import { UserProfileComponent } from '../components/user-profile/user-profile.component';
+
 const appRoutes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'home', component: HomepageComponent },
-
+  { path: 'profile', component: UserProfileComponent },
 ];
 
 @NgModule({
