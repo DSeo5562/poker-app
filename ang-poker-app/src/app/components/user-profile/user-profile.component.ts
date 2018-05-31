@@ -12,10 +12,10 @@ export class UserProfileComponent implements OnInit {
   public lastname: String = 'Ian';
   public fullname: String = '${firstname lastname}';
   public email: String = 'j@gmail.com';
-  public wins: number = 10;
-  public losses: number = 1;
-  public ratio: number = (this.wins / this.losses) * 100;
-  public winnings: number = 1000000;
+  public wins: Number = 10;
+  public losses: Number = 1;
+  // public ratio: Number = (this.wins / this.losses) * 100;
+  public winnings: Number = 1000000;
 
   constructor() { }
 
