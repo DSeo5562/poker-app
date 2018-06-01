@@ -10,11 +10,20 @@ body, html {
 
 .textOnBgColor {
   color: #C60314;
+  /* font-family: 'Limelight', cursive;
+  font-family: 'Shrikhand', cursive; */
+  font-family: 'Rye', cursive;
 }
 
-#titleBox {
-  text-align: center;
+.centerBox {
+  /* margin:0px auto; */
+  margin:auto;
+position:relative;
 }
+
+/* #titleBox {
+  text-align: center;
+} */
 
 .bg {
    /* background-image: url("../../assets/images/pokerAppBackground.jpg"); */

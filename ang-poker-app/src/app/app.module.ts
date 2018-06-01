@@ -11,6 +11,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { HomepageComponent } from './components/homepage/homepage.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
     NavbarComponent,
     HomepageComponent,
     UserProfileComponent,
+    EditProfileComponent,
   ],
   imports: [
     BrowserModule,

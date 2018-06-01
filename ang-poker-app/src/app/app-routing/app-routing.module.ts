@@ -10,6 +10,7 @@ import { NavbarComponent } from '../components/navbar/navbar.component';
 import { HomepageComponent } from '../components/homepage/homepage.component';
 
 import { UserProfileComponent } from '../components/user-profile/user-profile.component';
+import { EditProfileComponent } from '../components/edit-profile/edit-profile.component';
 
 const appRoutes: Routes = [
   { path: '', component: LoginComponent },
@@ -17,6 +18,8 @@ const appRoutes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'home', component: HomepageComponent },
   { path: 'profile', component: UserProfileComponent },
+  { path: 'edit', component: EditProfileComponent },
+
 ];
 
 @NgModule({

@@ -1,8 +1,16 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div id="titleBox">
-  <app-navbar></app-navbar>
-  <h1 class="textOnBgColor mt-5">
-    {{ title }}
-  </h1>
+<app-navbar></app-navbar>
+
+<div class="container" id="titleBox">
+  <div class="row align-items-start">
+    <div class="col"></div>
+    <div class="col">
+      <h1 class="textOnBgColor mt-5">
+        {{ title }}
+      </h1>
+    </div>
+    <div class="col"></div>
+</div>
+
 </div>
 <router-outlet></router-outlet>
