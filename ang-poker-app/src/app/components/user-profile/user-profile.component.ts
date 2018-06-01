@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UserProfileInfoService } from '../../services/user-profile-info.service';
+import { UserInfo } from '../../models/user-info.model';
 
 @Component({
   selector: 'app-user-profile',
@@ -7,6 +9,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserProfileComponent implements OnInit {
 
+  public userInfo: UserInfo;
+  //
   public username: String = 'Awang';
   public firstname: String = 'Kevin';
   public lastname: String = 'Ian';
@@ -17,9 +21,18 @@ export class UserProfileComponent implements OnInit {
   // public ratio: Number = (this.wins / this.losses) * 100;
   public winnings: Number = 1000000;
 
-  constructor() { }
+  constructor(private userInfoService: UserProfileInfoService) { }
 
   ngOnInit() {
+    this.getUserInformation();
+  }
+
+  getUserInformation(): void {
+    this.userInfoService.fetchUserInformation()
+      .subscribe(
+        (userInfo: UserInfo) => this.userInfo = userInfo,
+        error => console.log(`Error: ${error}`)
+      );
   }
 
 }
