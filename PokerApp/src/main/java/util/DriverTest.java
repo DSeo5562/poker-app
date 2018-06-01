@@ -1,5 +1,7 @@
 package util;
 
+import java.util.List;
+
 import beans.GameStates;
 import beans.Users;
 import dao.GameStatesDao;
@@ -19,19 +21,21 @@ public class DriverTest {
 //		System.out.println(s.isOpen());
 
 		UsersDao ud = new UsersDaoImpl();
-		GameStatesDao gd = new GameStatesDaoImpl();
-		GameStates g = new GameStates();
-		Users u = new Users(g, "aaaaa@gmail.com", "aaaaa", "Angela", "Wang", "awangaaaaa", false);
-		
-		int gId = gd.addGame(g);
-		int id = ud.addUser(u);
-		System.out.println("User ID: " + id);
-		System.out.println("Game ID: " + gId);
-		
-		int idA = 1;
-
-		Users user = ud.getUserById(idA);
-		System.out.println(user);
+//		GameStatesDao gd = new GameStatesDaoImpl();
+//		GameStates g = new GameStates();
+//		Users u = new Users(g, "aaaaa@gmail.com", "aaaaa", "Angela", "Wang", "awangaaaaa", false);
+//		
+//		int gId = gd.addGame(g);
+//		int id = ud.addUser(u);
+//		System.out.println("User ID: " + id);
+//		System.out.println("Game ID: " + gId);
+//		
+//		int idA = 1;
+//
+//		Users user = ud.getUserById(idA);
+//		System.out.println(user);
+		List<Users> users = ud.getUsers();
+		System.out.println(users);
 	}
 
 }

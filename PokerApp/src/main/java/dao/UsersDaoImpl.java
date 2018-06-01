@@ -40,14 +40,20 @@ public class UsersDaoImpl implements UsersDao {
 
 	@Override
 	public void updateUser(Users u) {
-		// TODO Auto-generated method stub
-		
+		Session s = HibernateUtil.getSession();
+		Transaction tx = s.beginTransaction();
+		s.save(u);
+		tx.commit();
+		s.close();
 	}
 
 	@Override
 	public void deleteUser(Users u) {
-		// TODO Auto-generated method stub
-		
+		Session s = HibernateUtil.getSession();
+		Transaction tx = s.beginTransaction();
+		s.delete(u);
+		tx.commit();
+		s.close();
 	}
 
 }
