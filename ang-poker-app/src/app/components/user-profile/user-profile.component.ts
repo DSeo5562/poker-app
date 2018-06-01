@@ -9,17 +9,17 @@ import { UserInfo } from '../../models/user-info.model';
 })
 export class UserProfileComponent implements OnInit {
 
-  public userInfo: UserInfo;
+  public userInfo: UserInfo = new UserInfo('Awang', 'Kevin', 'Ian', 'j@gmail.com', 10, 1, 1000000);
   //
-  public username: String = 'Awang';
-  public firstname: String = 'Kevin';
-  public lastname: String = 'Ian';
+  public username: String = this.userInfo.username;
+  public firstname: String = this.userInfo.fName;
+  public lastname: String = this.userInfo.lName;
   public fullname: String = '${firstname lastname}';
-  public email: String = 'j@gmail.com';
-  public wins: Number = 10;
-  public losses: Number = 1;
+  public email: String = this.userInfo.email;
+  public wins: Number = this.userInfo.wins;
+  public losses: Number = this.userInfo.losses;
   // public ratio: Number = (this.wins / this.losses) * 100;
-  public winnings: Number = 1000000;
+  public winnings: Number = this.userInfo.winnings;
 
   constructor(private userInfoService: UserProfileInfoService) { }
 

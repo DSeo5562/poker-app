@@ -11,7 +11,7 @@ import { UserInfo } from '../models/user-info.model';
 })
 export class UserProfileInfoService {
 
-  constructor(private http: Http, private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) { }
 
   public fetchUserInformation(): Observable<UserInfo> {
     return this.httpClient.get<UserInfo>('link goes here');

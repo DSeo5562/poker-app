@@ -1,35 +1,47 @@
 
 <div class="container">
-  <div class="row align-items-start">
+  <div class="row align-items-start mt-5">
     <div class="col">
-      <h3>Wins: {{ wins }}</h3>
+      <h3 class="textOnBgColor">Wins: {{ wins }}</h3>
     </div>
     <div class="col">
-      <h3>Losses: {{ losses }}</h3>
+      <h3 class="textOnBgColor">Losses: {{ losses }}</h3>
     </div>
     <div class="col">
-      <h3>Win/Loss Ratio: {{ wins/losses }}%</h3>
-    </div>
-  </div>
-    <div class="row align-items-start">
-    <div class="col">
-    </div>
-    <div class="col">
-      <h3>Total Winnings: ${{ winnings | number: '1.2' }}</h3>
-    </div>
-    <div class="col">
+      <h3 class="textOnBgColor">Win/Loss Ratio: {{ wins/losses }}%</h3>
     </div>
   </div>
-  <div class="row align-items-center">
+  <div class="row align-items-start mt-5">
+    <div class="col">
+    </div>
+    <div class="col">
+      <h3 class="textOnBgColor">Total Winnings: ${{ winnings | number: '1.2' }}</h3>
+    </div>
+    <div class="col">
+  </div>
+  </div>
+  <div class="row align-items-center mt-5">
     <div class="col">
     </div>
     <div class="col">
       <div class="card" style="width: 18rem;">
         <ul class="list-group list-group-flush">
-          <li class="list-group-item">Username: {{username}}</li>
-          <li class="list-group-item">Name: {{ firstname + " " + lastname }}</li>
-          <li class="list-group-item">Email: {{ email }}</li>
+          <li class="list-group-item">Username: <span class="ml-3"><strong>{{username}}</strong></span></li>
+          <li class="list-group-item">Name: <span class="ml-3"><strong>{{ firstname + " " + lastname }}</strong></span></li>
+          <li class="list-group-item">Email: <span class="ml-3"><strong>{{ email }}</strong></span></li>
         </ul>
+        <button type="button" class="btn btn-primary mt-3">Update Email</button>
+        <button type="button" class="btn btn-primary mt-3">Update Password</button>
+        <button type="button" class="btn btn-danger mt-3" data-toggle="modal" data-target=".bd-example-modal-lg">Delete Account</button>
+      </div>
+      <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <p class="m-5">Are you sure you would like to delete your account?</p>
+              <button type="button" class="btn btn-primary m-2">No, Do not delete my account</button>
+              <button type="button" class="btn btn-danger m-2">Yes, Delete my account</button>
+          </div>
+        </div>
       </div>
     </div>
     <div class="col">
@@ -40,7 +52,6 @@
     <div class="col">
     </div>
     <div class="col">
-      <button type="button" class="btn btn-danger">Delete Account</button>
     </div>
     <div class="col">
     </div>

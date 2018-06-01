@@ -4,8 +4,16 @@ body, html {
   height: 100%
 }
 
-h1, div {
+/* h1, div {
   color: #C60314;
+} */
+
+.textOnBgColor {
+  color: #C60314;
+}
+
+#titleBox {
+  text-align: center;
 }
 
 .bg {
