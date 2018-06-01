@@ -42,7 +42,7 @@ public class UsersDaoImpl implements UsersDao {
 	public void updateUser(Users u) {
 		Session s = HibernateUtil.getSession();
 		Transaction tx = s.beginTransaction();
-		s.save(u);
+		s.merge(u);
 		tx.commit();
 		s.close();
 	}
