@@ -1,8 +1,8 @@
-package dao;
+package com.revature.dao;
 
 import java.util.List;
 
-import beans.Users;
+import com.revature.beans.Users;
 
 public interface UsersDao {
 	public int addUser(Users u);

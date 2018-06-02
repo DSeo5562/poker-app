@@ -1,10 +1,10 @@
-package dao;
+package com.revature.dao;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import beans.GameStates;
-import util.HibernateUtil;
+import com.revature.beans.GameStates;
+import com.revature.util.HibernateUtil;
 
 public class GameStatesDaoImpl implements GameStatesDao{
 

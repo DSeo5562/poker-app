@@ -1,6 +1,6 @@
-package dao;
+package com.revature.dao;
 
-import beans.GameStates;
+import com.revature.beans.GameStates;
 
 public interface GameStatesDao {
 	public int addGame(GameStates g);

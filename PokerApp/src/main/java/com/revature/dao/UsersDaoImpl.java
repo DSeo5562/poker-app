@@ -1,4 +1,4 @@
-package dao;
+package com.revature.dao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,8 +6,8 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import beans.Users;
-import util.HibernateUtil;
+import com.revature.beans.Users;
+import com.revature.util.HibernateUtil;
 
 public class UsersDaoImpl implements UsersDao {
 
