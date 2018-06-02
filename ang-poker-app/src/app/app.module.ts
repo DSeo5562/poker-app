@@ -12,6 +12,7 @@ import { AppRoutingModule } from './app-routing/app-routing.module';
 import { HomepageComponent } from './components/homepage/homepage.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
+import { EditPasswordComponent } from './components/edit-password/edit-password.component';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import { EditProfileComponent } from './components/edit-profile/edit-profile.com
     HomepageComponent,
     UserProfileComponent,
     EditProfileComponent,
+    EditPasswordComponent,
   ],
   imports: [
     BrowserModule,

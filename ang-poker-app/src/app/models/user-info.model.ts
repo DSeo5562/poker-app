@@ -1,4 +1,4 @@
-import { GameState } from './gameState.model';
+import { GameState } from './game-state.model';
 
 export class UserInfo {
   userId: Number;
