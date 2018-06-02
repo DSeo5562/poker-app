@@ -12,9 +12,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.revature.beans.Users;
-import com.revature.util.HibernateUtil;
 
-@Repository(value="userRepository")
+@Repository(value="usersRepository")
 @Transactional
 @EnableTransactionManagement
 public class UsersRepository {

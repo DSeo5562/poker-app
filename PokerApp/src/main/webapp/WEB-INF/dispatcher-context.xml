@@ -10,7 +10,7 @@
 	<!-- search for Spring beans -->
 	<context:component-scan
 		base-package="com.revature"></context:component-scan>
-
+		
 	<!-- enable MVC annotations -->
 	<mvc:annotation-driven></mvc:annotation-driven>
 	
@@ -26,5 +26,5 @@
 	
 	<!-- enable static resource retrieval -->
 	<mvc:resources mapping="/static/**" location="/WEB-INF/static/"></mvc:resources>
-	
+
 </beans>

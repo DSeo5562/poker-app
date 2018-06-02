@@ -19,11 +19,17 @@ public class UsersController {
 
 	@Autowired
 	private UsersService usersService;
-	
+
 	@GetMapping("/all")
 	@ResponseBody
 	public ResponseEntity<List<Users>> getAllUsers() {
 		return new ResponseEntity<>(usersService.getUsers(), HttpStatus.OK);
 	}
-	
+
+	// test path for HTML page
+	@GetMapping(value = "/HelloPage")
+	public String getStaticFlashcardPage() {
+		return "Hello";
+	}
+
 }
