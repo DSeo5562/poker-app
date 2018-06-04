@@ -17,6 +17,7 @@ public class Game {
 	private HashMap<Character, Integer> cardValue;
 	
 	public Game() {
+		cardValue = new HashMap<Character, Integer>();
 		cardValue.put('2', 2);
 		cardValue.put('3', 3);
 		cardValue.put('4', 4);
@@ -86,7 +87,7 @@ public class Game {
 	}
 	
 	public int determinePlayerBestHand(Player p) {
-		ArrayList<String> possibleHand = (ArrayList<String>) Arrays.asList(p.getHand());
+		ArrayList<String> possibleHand = new ArrayList<>(p.getHand());
 		possibleHand.addAll(communityCards);
 		
 		sortHand(possibleHand);
@@ -100,7 +101,7 @@ public class Game {
 		
 		int val = checkStraight(possibleHand);
 		if(val > 0) {
-			handValue += 16_000_000;
+			handValue += 8_000_000;
 			handValue += (val * 10_000);
 			return handValue;
 		} else if(flush) {
@@ -137,33 +138,30 @@ public class Game {
 				handValue += 4_000_000;
 				handValue += (val * 10_000);
 				handValue += (val2 * 100);
-				int hc = getHighCard(possibleHand, val, val2);
+				int hc = getHighCard(p.getHand());
 				handValue += hc;
 				return handValue;
 			} else {
 				handValue += 2_000_000;
 				handValue += (val * 10_000);
-				int hc = getHighCard(possibleHand, val, 0);
+				int hc = getHighCard(p.getHand());
 				handValue += hc;
 				return handValue;
 			}
 		}
 		
-		return getHighCard(possibleHand, 0, 0);
+		return getHighCard(p.getHand());
 	}
 	
-	private int getHighCard(ArrayList<String> hand, int ignore1, int ignore2) {
+	public int getHighCard(ArrayList<String> hand) {
 		int highCard = 0;
 		for(String s: hand) {
-			int val = cardValue.get(s.charAt(0));
-			if(val == ignore1 || val == ignore2) continue;
-			
-			highCard = Math.max(highCard, val);
+			highCard += cardValue.get(s.charAt(0));
 		}
 		return highCard;
 	}
 	
-	private int checkPair(ArrayList<String> hand, int ignore) {
+	public int checkPair(ArrayList<String> hand, int ignore) {
 		ArrayList<Integer> cardValues = new ArrayList<>();
 		for (String s : hand) {
 			cardValues.add(cardValue.get(s.charAt(0)));
@@ -188,7 +186,7 @@ public class Game {
 		return maxCard;
 	}
 	
-	private int checkThreeOfAKind(ArrayList<String> hand) {
+	public int checkThreeOfAKind(ArrayList<String> hand) {
 		ArrayList<Integer> cardValues = new ArrayList<>();
 		for (String s : hand) {
 			cardValues.add(cardValue.get(s.charAt(0)));
@@ -204,14 +202,13 @@ public class Game {
 				count++;
 				if (count == 3) {
 					maxCard = cardValues.get(x);
-					return maxCard;
 				}
 			}
 		}
 		return maxCard;
 	}
 		
-	private boolean checkFlush(ArrayList<String> hand) {
+	public boolean checkFlush(ArrayList<String> hand) {
 		int spades = 0;
 		int hearts = 0;
 		int diamonds = 0;
@@ -232,7 +229,7 @@ public class Game {
 		} else return false;
 	}
 	
-	private int checkFourOfAKind(ArrayList<String> hand) {
+	public int checkFourOfAKind(ArrayList<String> hand) {
 		ArrayList<Integer> cardValues = new ArrayList<>();
 		for (String s : hand) {
 			cardValues.add(cardValue.get(s.charAt(0)));
@@ -255,14 +252,14 @@ public class Game {
 		return maxCard;
 	}
 	
-	private int checkStraight(ArrayList<String> hand) {
+	public int checkStraight(ArrayList<String> hand) {
 		ArrayList<Integer> cardValues = new ArrayList<>();
 		//convert to card values
 		for (String s : hand) {
 			cardValues.add(cardValue.get(s.charAt(0)));
 		}
 		//Quick check if not straight
-		if ((cardValues.get(4) - 1) != cardValue.get(3)) {
+		if ((cardValues.get(4) - 1) != cardValues.get(3)) {
 			return 0;		
 		}
 		//check for straight
@@ -281,21 +278,12 @@ public class Game {
 		return maxCard;
 	}
 		
-	private void sortHand(ArrayList<String> hand) {
+	public void sortHand(ArrayList<String> hand) {
 		hand.sort((card1, card2) -> {
 			int c1Val = cardValue.get(card1.charAt(0));
 			int c2Val = cardValue.get(card2.charAt(0));
 			if(c1Val == c2Val) return 0;
 			return (c1Val < c2Val) ? -1 : 1;
 		});
-	}
-
-	public String declareGameWinner() {
-		return "";
-	}
-	
-	public void newRound() {
-		deck.getNewDeck();
-		deck.shuffleDeck();
 	}
 }

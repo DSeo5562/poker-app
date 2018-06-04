@@ -1,5 +1,6 @@
 package beans;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 
@@ -7,17 +8,20 @@ public class Player {
 
 	private String username;
 	private int winnings;
-	private String[] hand = new String[2];
+	private ArrayList<String> hand;
 	private playerAction lastAction;
+	
+	public Player() {
+		hand = new ArrayList<String>();
+		username = null;
+		lastAction = null;
+		winnings = 0;
+	}
 	
 	enum playerAction {
 		FOLD, CHECK, BET;
 	}
 	
-	public Player() {
-		super();
-	}
-
 	public String getUsername() {
 		return username;
 	}
@@ -34,13 +38,13 @@ public class Player {
 		this.winnings = winnings;
 	}
 
-	public String[] getHand() {
+	public ArrayList<String> getHand() {
 		return hand;
 	}
 
 	public void setHand(String card1, String card2) {
-		hand[0] = card1;
-		hand[1] = card2;
+		hand.add(card1);
+		hand.add(card2);
 	}
 
 	public playerAction getLastAction() {
@@ -49,11 +53,5 @@ public class Player {
 
 	public void setLastAction(playerAction lastAction) {
 		this.lastAction = lastAction;
-	}
-
-	@Override
-	public String toString() {
-		return "Player [username=" + username + ", winnings=" + winnings + ", hand=" + Arrays.toString(hand)
-				+ ", lastAction=" + lastAction + "]";
 	}
 }
