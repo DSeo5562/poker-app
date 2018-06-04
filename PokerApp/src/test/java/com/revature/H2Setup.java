@@ -1,12 +1,5 @@
 package com.revature;
 
-import org.h2.tools.RunScript;
-import org.hibernate.Session;
-import org.hibernate.jdbc.Work;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -16,6 +9,13 @@ import java.sql.SQLException;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+
+import org.h2.tools.RunScript;
+import org.hibernate.Session;
+import org.hibernate.jdbc.Work;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
 
 public class H2Setup {
 
