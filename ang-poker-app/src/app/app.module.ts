@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 
 // components
 import { AppComponent } from './app.component';
@@ -9,6 +10,9 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { HomepageComponent } from './components/homepage/homepage.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
+import { EditPasswordComponent } from './components/edit-password/edit-password.component';
 
 
 @NgModule({
@@ -18,10 +22,14 @@ import { HomepageComponent } from './components/homepage/homepage.component';
     LoginComponent,
     NavbarComponent,
     HomepageComponent,
+    UserProfileComponent,
+    EditProfileComponent,
+    EditPasswordComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   exports: [ ],
   providers: [],
