@@ -1,9 +1,6 @@
 package beans;
 
-import static org.junit.Assert.assertArrayEquals;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 
 import beans.Player.playerAction;
@@ -33,6 +30,18 @@ public class Game {
 		cardValue.put('A', 14);
 	}
 	
+	public void newRound() {
+		//controls game flow
+		dealToPlayers();
+		cycle();
+		dealFlop();
+		cycle();
+		dealTurn();
+		cycle();
+		dealRiver();
+		cycle();	
+	}
+	
 	public void dealToPlayers() {
 		for (Player p : players) {
 			p.setHand(deck.dealCard(), deck.dealCard());
@@ -41,27 +50,50 @@ public class Game {
 	
 	public void dealFlop() {
 		//deal 3 community cards
-		communityCards.add(deck.dealCard());
-		communityCards.add(deck.dealCard());
-		communityCards.add(deck.dealCard());	
+		getCommunityCards().add(deck.dealCard());
+		getCommunityCards().add(deck.dealCard());
+		getCommunityCards().add(deck.dealCard());	
 	}
 	
 	public void dealTurn() {
 		//deal 4th card
-		communityCards.add(deck.dealCard());
+		getCommunityCards().add(deck.dealCard());
 	}
 	
 	public void dealRiver() {
 		//deal 5th and final card
-		communityCards.add(deck.dealCard());
+		getCommunityCards().add(deck.dealCard());
 	}
 	
-	public void cycle() {
-		
+	public void cycle() {	
+		for (Player p : players) {
+			if (p.getLastAction() != playerAction.FOLD) {
+				//setCurrentTurn();
+			}
+			if (doesCycleContinue() == false) {
+				//
+			}
+			if (p.getLastAction() != playerAction.FOLD) {
+				askPlayer(p);
+			}
+		}
 	}
 	
-	public void askPlayer() {
-		
+	public void setPlayerOrder() {
+		for (int x = 0; x < players.size(); x++) {
+			//set order in DB using CurrentHands
+		}	
+	}
+	
+	public void setCurrentTurn(int turn) {
+		//update DB
+		//use for reset
+	}
+	
+	public void askPlayer(Player p) {
+//		while(getCurrentTurn == playerObj.getPlayerOrder()) {
+//			thread.sleep(5000);
+//		}
 	}
 	
 	public void updateGameState() {
@@ -82,13 +114,27 @@ public class Game {
 		return (count > 1);
 	}
 	
-	public String declareRoundWinner() {
-		return "";
+	public ArrayList<Player> declareRoundWinner() {
+		int maxScore = 0;
+		ArrayList<Player> winner = new ArrayList<>();
+		for (Player p : players) {
+			if (p.getLastAction() != playerAction.FOLD) {
+				int score = determinePlayerBestHand(p);
+				if (score > maxScore) {
+					winner.clear();
+					winner.add(p);
+					maxScore = score;					
+				} else if (score == maxScore) {
+					winner.add(p);
+				}
+			}
+		}
+		return winner;
 	}
 	
 	public int determinePlayerBestHand(Player p) {
 		ArrayList<String> possibleHand = new ArrayList<>(p.getHand());
-		possibleHand.addAll(communityCards);
+		possibleHand.addAll(getCommunityCards());
 		
 		sortHand(possibleHand);
 		
@@ -285,5 +331,13 @@ public class Game {
 			if(c1Val == c2Val) return 0;
 			return (c1Val < c2Val) ? -1 : 1;
 		});
+	}
+
+	public ArrayList<String> getCommunityCards() {
+		return communityCards;
+	}
+
+	public void setCommunityCards(ArrayList<String> communityCards) {
+		this.communityCards = communityCards;
 	}
 }
