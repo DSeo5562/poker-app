@@ -2,10 +2,7 @@ package util;
 
 import java.util.List;
 
-import beans.GameStates;
 import beans.Users;
-import dao.GameStatesDao;
-import dao.GameStatesDaoImpl;
 import dao.UsersDao;
 import dao.UsersDaoImpl;
 
