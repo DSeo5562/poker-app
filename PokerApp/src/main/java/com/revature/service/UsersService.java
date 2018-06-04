@@ -16,6 +16,9 @@ public class UsersService {
 	
 	public List<Users> getUsers() {
 		List<Users> users = ur.getUsers();
+		Users u = new Users(null, "aaaaa@gmail.com", "aaaaa", "Angela", "Wang", "awangaaaaa", false);
+		int id = ur.addUser(u);
+		System.out.println(id);
 		return users;
 	}
 
