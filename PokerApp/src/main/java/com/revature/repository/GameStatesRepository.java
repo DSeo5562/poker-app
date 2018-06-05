@@ -61,6 +61,7 @@ public class GameStatesRepository {
 		Session s = sessionFactory.getCurrentSession();
 		Transaction tx = s.beginTransaction();
 		c.setWinnings(c.getWinnings() + g.getPot());
+		s.update(c);
 		tx.commit();
 		s.close();
 	}
