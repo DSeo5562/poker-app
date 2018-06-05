@@ -13,6 +13,7 @@ import { HomepageComponent } from './components/homepage/homepage.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 import { EditPasswordComponent } from './components/edit-password/edit-password.component';
+import { GameboardComponent } from './components/gameboard/gameboard.component';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { EditPasswordComponent } from './components/edit-password/edit-password.
     UserProfileComponent,
     EditProfileComponent,
     EditPasswordComponent,
+    GameboardComponent,
   ],
   imports: [
     BrowserModule,
