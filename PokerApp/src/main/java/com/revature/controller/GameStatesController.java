@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.revature.beans.GameStates;
 import com.revature.service.GameStatesService;
 
-@Controller("usersController")
-@RequestMapping("/users")
+@Controller("gameStatesController")
+@RequestMapping("/gameStates")
 public class GameStatesController {
 	
 	@Autowired
