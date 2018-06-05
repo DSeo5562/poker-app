@@ -14,11 +14,21 @@
 	<mvc:annotation-driven />
 	
 	<!-- data source -->
+	<!-- Local DB -->
+	<!-- 
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
 		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
 		<property name="username" value="SYSTEM"/>
 		<property name="password" value="Magnificent-24"/>
+	</bean>
+	 -->
+	 <!-- AWS -->
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+		<property name="url" value="jdbc:oracle:thin:@mydatabase.cpaojdeahbn2.us-east-2.rds.amazonaws.com:1521:orcl"/>
+		<property name="username" value="superusers"/>
+		<property name="password" value="p4ssw0rd"/>
 	</bean>
 	
 	<!-- session factory  -->
