@@ -23,7 +23,7 @@ public class UsersController {
 	@GetMapping("/all")
 	@ResponseBody
 	public ResponseEntity<List<Users>> getAllUsers() {
-		return new ResponseEntity<>(usersService.getUsers(), HttpStatus.OK);
+		return new ResponseEntity<>(usersService.getAllUsers(), HttpStatus.OK);
 	}
 
 	// test path for HTML page

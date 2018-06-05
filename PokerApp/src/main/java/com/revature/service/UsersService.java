@@ -14,12 +14,26 @@ public class UsersService {
 	@Autowired
 	UsersRepository ur;
 	
-	public List<Users> getUsers() {
-		List<Users> users = ur.getUsers();
-		Users u = new Users(null, "aaaaa@gmail.com", "aaaaa", "Angela", "Wang", "awangaaaaa", false);
-		int id = ur.addUser(u);
-		System.out.println(id);
+	public void addUser(Users u) {
+		ur.addUser(u);
+	}
+	
+	public Users getUserById(int id) {
+		Users u = ur.getUserById(id);
+		return u;
+	}
+	
+	public List<Users> getAllUsers() {
+		List<Users> users = ur.getAllUsers();
 		return users;
+	}
+	
+	public void updateUser(Users u) {
+		ur.updateUser(u);
+	}
+	
+	public void deleteUser(Users u) {
+		ur.deleteUser(u);
 	}
 
 }

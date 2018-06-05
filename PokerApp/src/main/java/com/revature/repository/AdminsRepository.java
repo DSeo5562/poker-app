@@ -11,47 +11,47 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.revature.beans.Users;
+import com.revature.beans.Admins;
 
-@Repository(value="usersRepository")
+@Repository(value="adminsRepository")
 @Transactional
 @EnableTransactionManagement
-public class UsersRepository {
-	
+public class AdminsRepository {
+
 	@Autowired
 	SessionFactory sessionFactory;
 	
-	public int addUser(Users u) {
+	public int addAdmin(Admins a) {
 		Session s = sessionFactory.getCurrentSession();
-		int result = (int) s.save(u);
+		int result = (int) s.save(a);
 		return result;
 	}
 
-	public Users getUserById(int id) {
+	public Admins getAdminById(int id) {
 		Session s = sessionFactory.getCurrentSession();
-		Users u = (Users) s.get(Users.class, id);
-		return u;
+		Admins a = (Admins) s.get(Admins.class, id);
+		return a;
 	}
 
-	public List<Users> getAllUsers() {
-		List<Users> users = new ArrayList<Users>();
+	public List<Admins> getAdmins() {
+		List<Admins> admins = new ArrayList<Admins>();
 		Session s = sessionFactory.getCurrentSession();
-		users = s.createQuery("from Users").list();
-		return users;
+		admins = s.createQuery("from Admins").list();
+		return admins;
 	}
 
-	public void updateUser(Users u) {
+	public void updateAdmin(Admins a) {
 		Session s = sessionFactory.getCurrentSession();
 		Transaction tx = s.beginTransaction();
-		s.update(u);
+		s.update(a);
 		tx.commit();
 		s.close();
 	}
 
-	public void deleteUser(Users u) {
+	public void deleteAdmin(Admins a) {
 		Session s = sessionFactory.getCurrentSession();
 		Transaction tx = s.beginTransaction();
-		s.delete(u);
+		s.delete(a);
 		tx.commit();
 		s.close();
 	}

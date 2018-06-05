@@ -11,47 +11,47 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.revature.beans.Users;
+import com.revature.beans.CurrentHands;
 
-@Repository(value="usersRepository")
+@Repository(value="currentHandsRepository")
 @Transactional
 @EnableTransactionManagement
-public class UsersRepository {
+public class CurrentHandsRepository {
 	
 	@Autowired
 	SessionFactory sessionFactory;
 	
-	public int addUser(Users u) {
+	public int addCurrentHand(CurrentHands h) {
 		Session s = sessionFactory.getCurrentSession();
-		int result = (int) s.save(u);
+		int result = (int) s.save(h);
 		return result;
 	}
 
-	public Users getUserById(int id) {
+	public CurrentHands getCurrentHandById(int id) {
 		Session s = sessionFactory.getCurrentSession();
-		Users u = (Users) s.get(Users.class, id);
-		return u;
+		CurrentHands h = (CurrentHands) s.get(CurrentHands.class, id);
+		return h;
 	}
 
-	public List<Users> getAllUsers() {
-		List<Users> users = new ArrayList<Users>();
+	public List<CurrentHands> getCurrentHands() {
+		List<CurrentHands> currentHands = new ArrayList<CurrentHands>();
 		Session s = sessionFactory.getCurrentSession();
-		users = s.createQuery("from Users").list();
-		return users;
+		currentHands = s.createQuery("from CurrentHands").list();
+		return currentHands;
 	}
 
-	public void updateUser(Users u) {
+	public void updateCurrentHand(CurrentHands h) {
 		Session s = sessionFactory.getCurrentSession();
 		Transaction tx = s.beginTransaction();
-		s.update(u);
+		s.update(h);
 		tx.commit();
 		s.close();
 	}
 
-	public void deleteUser(Users u) {
+	public void deleteCurrentHand(CurrentHands h) {
 		Session s = sessionFactory.getCurrentSession();
 		Transaction tx = s.beginTransaction();
-		s.delete(u);
+		s.delete(h);
 		tx.commit();
 		s.close();
 	}

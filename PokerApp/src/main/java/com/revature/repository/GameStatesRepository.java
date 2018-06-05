@@ -43,7 +43,7 @@ public class GameStatesRepository {
 	public void updateGameState(GameStates g) {
 		Session s = sessionFactory.getCurrentSession();
 		Transaction tx = s.beginTransaction();
-		s.merge(g);
+		s.update(g);
 		tx.commit();
 		s.close();
 	}

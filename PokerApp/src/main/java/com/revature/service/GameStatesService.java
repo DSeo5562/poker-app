@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.revature.beans.GameStates;
 import com.revature.beans.Users;
 import com.revature.repository.GameStatesRepository;
+import com.revature.repository.UsersRepository;
 
 @Service(value="gameStatesService")
 public class GameStatesService {
@@ -15,12 +16,26 @@ public class GameStatesService {
 	@Autowired
 	GameStatesRepository gr;
 	
+	public void addGameState(GameStates g) {
+		gr.addGameState(g);
+	}
+	
+	public GameStates getUserById(int id) {
+		GameStates g = gr.getGameStateById(id);
+		return g;
+	}
+	
 	public List<GameStates> getGameStates() {
 		List<GameStates> gameStates = gr.getGameStates();
-		GameStates g = new GameStates();
-		int gId = gr.addGameState(g);
-		System.out.println(gId);
 		return gameStates;
+	}
+	
+	public void updateGameState(GameStates g) {
+		gr.updateGameState(g);
+	}
+	
+	public void deleteGameState(GameStates g) {
+		gr.deleteGameState(g);
 	}
 
 }

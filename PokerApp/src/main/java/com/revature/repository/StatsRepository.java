@@ -11,47 +11,47 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.revature.beans.Users;
+import com.revature.beans.Stats;
 
-@Repository(value="usersRepository")
+@Repository(value="statsRepository")
 @Transactional
 @EnableTransactionManagement
-public class UsersRepository {
+public class StatsRepository {
 	
 	@Autowired
 	SessionFactory sessionFactory;
 	
-	public int addUser(Users u) {
+	public int addStat(Stats st) {
 		Session s = sessionFactory.getCurrentSession();
-		int result = (int) s.save(u);
+		int result = (int) s.save(st);
 		return result;
 	}
 
-	public Users getUserById(int id) {
+	public Stats getStatById(int id) {
 		Session s = sessionFactory.getCurrentSession();
-		Users u = (Users) s.get(Users.class, id);
-		return u;
+		Stats st = (Stats) s.get(Stats.class, id);
+		return st;
 	}
 
-	public List<Users> getAllUsers() {
-		List<Users> users = new ArrayList<Users>();
+	public List<Stats> getStats() {
+		List<Stats> stats = new ArrayList<Stats>();
 		Session s = sessionFactory.getCurrentSession();
-		users = s.createQuery("from Users").list();
-		return users;
+		stats = s.createQuery("from Stats").list();
+		return stats;
 	}
 
-	public void updateUser(Users u) {
+	public void updateStat(Stats st) {
 		Session s = sessionFactory.getCurrentSession();
 		Transaction tx = s.beginTransaction();
-		s.update(u);
+		s.update(st);
 		tx.commit();
 		s.close();
 	}
 
-	public void deleteUser(Users u) {
+	public void deleteStat(Stats st) {
 		Session s = sessionFactory.getCurrentSession();
 		Transaction tx = s.beginTransaction();
-		s.delete(u);
+		s.delete(st);
 		tx.commit();
 		s.close();
 	}
