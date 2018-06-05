@@ -5,10 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.revature.beans.CurrentHands;
 import com.revature.beans.GameStates;
-import com.revature.beans.Users;
 import com.revature.repository.GameStatesRepository;
-import com.revature.repository.UsersRepository;
 
 @Service(value="gameStatesService")
 public class GameStatesService {
@@ -36,6 +35,14 @@ public class GameStatesService {
 	
 	public void deleteGameState(GameStates g) {
 		gr.deleteGameState(g);
+	}
+	
+	public void transferWinnings(GameStates g, CurrentHands c) {
+		gr.transferWinnings(g, c);
+	}
+	
+	public int getCurrentTurn(GameStates g) {
+		return gr.getCurrentTurn(g);
 	}
 
 }

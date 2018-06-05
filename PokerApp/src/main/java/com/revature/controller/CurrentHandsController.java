@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.revature.beans.CurrentHands;
+import com.revature.beans.Users;
 import com.revature.service.CurrentHandsService;
 
 @Controller("currentHandsController")

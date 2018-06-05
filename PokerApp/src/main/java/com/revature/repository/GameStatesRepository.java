@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.revature.beans.CurrentHands;
 import com.revature.beans.GameStates;
 
 @Repository(value="gameStatesRepository")
@@ -54,6 +55,18 @@ public class GameStatesRepository {
 		s.delete(g);
 		tx.commit();
 		s.close();
+	}
+	
+	public void transferWinnings(GameStates g, CurrentHands c) {
+		Session s = sessionFactory.getCurrentSession();
+		Transaction tx = s.beginTransaction();
+		c.setWinnings(c.getWinnings() + g.getPot());
+		tx.commit();
+		s.close();
+	}
+	
+	public int getCurrentTurn(GameStates g) {
+		return g.getCurrentTurn();
 	}
 
 }
