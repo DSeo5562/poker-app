@@ -24,7 +24,7 @@ public class CurrentHands implements Serializable{
 		this.hand = hand;
 		this.winnings = winnings;
 		this.hasFolded = hasFolded;
-		this.playerOrder = playerOrder;
+		this.playerOrder = playerOrder; //set when player enters game, doesn't change
 	}
 
 	/**
