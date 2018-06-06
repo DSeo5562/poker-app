@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.revature.beans.CurrentHands;
+import com.revature.beans.Users;
 import com.revature.repository.CurrentHandsRepository;
 
 @Service(value="currentHandsService")
@@ -14,12 +15,17 @@ public class CurrentHandsService {
 	@Autowired
 	CurrentHandsRepository chr;
 	
-	public void addCurrentHand(CurrentHands c) {
-		chr.addCurrentHand(c);
+	public void addCurrentHand(CurrentHands c, Users u) {
+		chr.addCurrentHand(c, u);
 	}
 	
 	public CurrentHands getCurrentHandById(int id) {
 		CurrentHands c = chr.getCurrentHandById(id);
+		return c;
+	}
+	
+	public CurrentHands getCurrentHandByUsername(String username) {
+		CurrentHands c = chr.getCurrentHandByUsername(username);
 		return c;
 	}
 	

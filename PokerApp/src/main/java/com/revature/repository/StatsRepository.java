@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.revature.beans.CurrentHands;
 import com.revature.beans.Stats;
 import com.revature.beans.Users;
 
@@ -39,6 +40,13 @@ public class StatsRepository {
 		Users user = ur.getUserById(id);
 		Stats stat = (Stats) s.createCriteria(Stats.class).add(Restrictions.eq("user", user)).uniqueResult();	 
 	
+		return stat;
+	}
+	
+	public Stats getStatsByUsername(String username) {
+		Session s = sessionFactory.getCurrentSession();	
+		Users user = ur.getUserByUsername(username);
+		Stats stat = (Stats) s.createCriteria(Stats.class).add(Restrictions.eq("user", user)).uniqueResult();	
 		return stat;
 	}
 

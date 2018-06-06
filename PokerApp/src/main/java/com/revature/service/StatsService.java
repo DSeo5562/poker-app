@@ -28,6 +28,11 @@ public class StatsService {
 		return stats;
 	}
 	
+	public Stats getStatsByUsername(String username) {
+		Stats stat = sr.getStatsByUsername(username);
+		return stat;
+	}
+	
 	public void updateStat(Stats st) {
 		sr.updateStat(st);
 	}

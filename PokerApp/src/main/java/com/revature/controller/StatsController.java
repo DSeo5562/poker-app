@@ -33,10 +33,19 @@ public class StatsController {
 	}
 	
 	@CrossOrigin
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/byId/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Stats> getStatsByUser(@PathVariable int id) {
 		ResponseEntity<Stats> resp = null;
 		Stats stat = statsService.getStatByUserId(id);
+		resp = new ResponseEntity<>(stat, HttpStatus.OK);
+		return resp;
+	}
+	
+	@CrossOrigin
+	@RequestMapping(value = "/byUsername/{username}", method = RequestMethod.GET)
+	public ResponseEntity<Stats> getStatsByUserName(@PathVariable String username) {
+		ResponseEntity<Stats> resp = null;
+		Stats stat = statsService.getStatsByUsername(username);
 		resp = new ResponseEntity<>(stat, HttpStatus.OK);
 		return resp;
 	}

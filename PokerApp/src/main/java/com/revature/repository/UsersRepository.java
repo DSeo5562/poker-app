@@ -24,9 +24,6 @@ public class UsersRepository {
 	@Autowired
 	SessionFactory sessionFactory;
 
-	@Autowired
-	GameStatesRepository gr;
-
 	// Adds an empty game state
 	// Default game state for a new user
 	GameStates g = new GameStates(-1, "", 0, 0, 0, 0, "");
@@ -54,12 +51,9 @@ public class UsersRepository {
 	}
 	
 	public Users getUserByUsername(String username) {
-		Session s = sessionFactory.getCurrentSession();
-		
-		Users user = (Users) s.createCriteria(Users.class).add(Restrictions.eq("username", username)).uniqueResult();
-		
+		Session s = sessionFactory.getCurrentSession();		
+		Users user = (Users) s.createCriteria(Users.class).add(Restrictions.eq("username", username)).uniqueResult();	
 		return user;
-		
 	}
 
 	public void updateUser(Users u) {

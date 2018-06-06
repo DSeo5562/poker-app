@@ -6,12 +6,14 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.revature.beans.CurrentHands;
+import com.revature.beans.Users;
 
 @Repository(value="currentHandsRepository")
 @Transactional
@@ -21,8 +23,12 @@ public class CurrentHandsRepository {
 	@Autowired
 	SessionFactory sessionFactory;
 	
-	public int addCurrentHand(CurrentHands h) {
+	@Autowired
+	UsersRepository ur;
+	
+	public int addCurrentHand(CurrentHands h, Users u) {
 		Session s = sessionFactory.getCurrentSession();
+		h.setUser(u);
 		int result = (int) s.save(h);
 		return result;
 	}
@@ -31,6 +37,13 @@ public class CurrentHandsRepository {
 		Session s = sessionFactory.getCurrentSession();
 		CurrentHands h = (CurrentHands) s.get(CurrentHands.class, id);
 		return h;
+	}
+	
+	public CurrentHands getCurrentHandByUsername(String username) {
+		Session s = sessionFactory.getCurrentSession();	
+		Users user = ur.getUserByUsername(username);
+		CurrentHands currentHand = (CurrentHands) s.createCriteria(CurrentHands.class).add(Restrictions.eq("user", user)).uniqueResult();	
+		return currentHand;
 	}
 
 	public List<CurrentHands> getCurrentHands() {
