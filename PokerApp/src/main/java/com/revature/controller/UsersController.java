@@ -40,24 +40,6 @@ public class UsersController {
 	public String getStaticHelloPage() {
 		return "Hello";
 	}
-
-//	@CrossOrigin
-//	@PostMapping("/login")
-//	public String handleLogin(@RequestBody MultiValueMap<String, String> formParams) {
-//		System.out.println("form params received " + formParams);
-//
-//		String username = formParams.getFirst("username");
-//		String password = formParams.getFirst("password");
-//		List<Users> u = usersService.getAllUsers();
-//
-//		System.out.println(username + " is trying to login with password:" + password);
-//
-//		String destination = ul.checkLogin(username, password, u);
-//		
-//		System.out.println(destination);
-//
-//		return destination;
-//	}
 	
 	@CrossOrigin
 	@RequestMapping(value="/login", method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
