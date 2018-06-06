@@ -15,7 +15,7 @@
             <div class="form-group">
               <input name="friend" [(ngModel)]="query" type="text" class="form-control" id="invFriendsInput" placeholder="Invite Friends">
               <ul id="filerUsers" class="list-group mt-3">
-                <li [class.list-group-item-success]="this.friendsToInvite.includes(user)" (click)="addFriendsToArr(user)" class="list-group-item list-group-item-action" *ngFor="let user of users | filterUsername:query">{{user}}</li>
+                <li [class.list-group-item-success]="this.friendsToInvite.includes(user.username)" (click)="addFriendsToArr(user)" class="list-group-item list-group-item-action" *ngFor="let user of users | filterUsername:query">{{user.username}}</li>
               </ul>
             </div>
 
