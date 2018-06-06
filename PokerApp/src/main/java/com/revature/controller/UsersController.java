@@ -52,11 +52,7 @@ public class UsersController extends HttpServlet {
 	public String getStaticHelloPage() {
 		return "Hello";
 	}
-<<<<<<< HEAD
 
-=======
-	
->>>>>>> 08c2e2ba818c180769701301edb59dfe323de998
 	@CrossOrigin
 	@RequestMapping(value = "/{username}", method = RequestMethod.GET)
 	public ResponseEntity<Users> getUsersByUserName(@PathVariable String username) {
@@ -66,20 +62,15 @@ public class UsersController extends HttpServlet {
 		return resp;
 	}
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
-	}
-
 	@CrossOrigin
 	@RequestMapping(value = "/session", method = RequestMethod.GET)
 	public ResponseEntity<Users> getUserForSession(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
 		// Get current session
 		HttpSession session = request.getSession(false);
 		String username = (String) session.getAttribute("username");
-
-		Session s = sessionFactory.getCurrentSession();
+		
 		ResponseEntity<Users> resp = null;
 		Users user = usersService.getUserByUsername(username);
 		resp = new ResponseEntity<>(user, HttpStatus.OK);
@@ -115,10 +106,6 @@ public class UsersController extends HttpServlet {
 		String username = formParams.getFirst("username");
 		String password = formParams.getFirst("password");
 
-		// Get current session
-		HttpSession session = request.getSession(false);
-		session.setAttribute("username", username);
-
 		System.out.println(username + " is trying to login with password:" + password);
 
 		Users user = usersService.getUserByUsername(username);
@@ -130,8 +117,8 @@ public class UsersController extends HttpServlet {
 		redirectView.setUrl(dest);
 		
 		// If the user successfully logs in
-		HttpSession session = request.getSession();
-		if (dest.equals("Employee") || dest.equals("Manager")) {
+		HttpSession session = request.getSession();	
+		if (dest.equals("http://localhost:4200/home/")){
 			session.setAttribute("username", username);
 		}
 		
