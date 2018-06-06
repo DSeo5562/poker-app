@@ -5,12 +5,29 @@ import java.util.Arrays;
 
 
 public class Player {
-
+	private int id;
 	private String username;
 	private int winnings;
 	private ArrayList<String> hand;
 	private playerAction lastAction;
+	private int playerOrder;
 	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	public int getPlayerOrder() {
+		return playerOrder;
+	}
+
+	public void setPlayerOrder(int playerOrder) {
+		this.playerOrder = playerOrder;
+	}
+
 	public Player() {
 		hand = new ArrayList<String>();
 		username = null;
