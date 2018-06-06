@@ -38,7 +38,10 @@ public class UsersController extends HttpServlet {
 	private UsersService usersService;
 
 	@Autowired
-	SessionFactory sessionFactory;
+	private SessionFactory sessionFactory;
+	
+	@Autowired
+	private HttpSession httpSession;
 
 	@CrossOrigin
 	@GetMapping("/all")
@@ -117,13 +120,37 @@ public class UsersController extends HttpServlet {
 		redirectView.setUrl(dest);
 		
 		// If the user successfully logs in
-		HttpSession session = request.getSession();	
-		if (dest.equals("http://localhost:4200/home/")){
-			session.setAttribute("username", username);
-		}
+		httpSession = request.getSession();	
+		httpSession.setAttribute("username", username);
+		
+//		if (dest.equals("http://localhost:4200/home/")){
+//			httpSession.setAttribute("username", username);
+//		}
 		
 		return redirectView;
 	}
+	
+//	@CrossOrigin
+//	@RequestMapping(value = "/logout", method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+//    public RedirectView logout(HttpServletRequest request) {
+//    	httpSession = request.getSession();
+//    	httpSession.invalidate();
+//    	RedirectView redirectView = new RedirectView();
+//		redirectView.setUrl("http://localhost:4200/login/");
+//		
+//		return redirectView;
+//    }
+	
+	@CrossOrigin
+	@RequestMapping("/logout")
+    @ResponseBody
+    public RedirectView logout(HttpSession session) {
+        session.invalidate();
+
+        RedirectView redirectView = new RedirectView();
+		redirectView.setUrl("http://localhost:4200/login/");
+		return redirectView;
+    }
 
 	// to return bundled Angular app
 	@GetMapping(value = "/app")

@@ -1054,7 +1054,7 @@ var UserProfileInfoService = /** @class */ (function () {
         this.httpClient = httpClient;
     }
     UserProfileInfoService.prototype.fetchUserInformation = function () {
-        return this.httpClient.get('http://ec2-52-15-128-99.us-east-2.compute.amazonaws.com:8080/PokerApp/userInfo');
+        return this.httpClient.get('http://localhost:8087/PokerApp/users/all');
     };
     UserProfileInfoService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({

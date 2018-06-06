@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -20,16 +21,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.revature.beans.Stats;
-import com.revature.beans.Users;
 import com.revature.service.StatsService;
-import com.revature.service.UsersService;
 
 @Controller("statsController")
 @RequestMapping("/stats")
-public class StatsController {
+public class StatsController extends HttpServlet {
 
 	@Autowired
 	private StatsService statsService;
+
+	@Autowired
+	private HttpSession httpSession;
 
 	@CrossOrigin
 	@GetMapping("/all")
@@ -37,7 +39,7 @@ public class StatsController {
 	public ResponseEntity<List<Stats>> getAllUsers() {
 		return new ResponseEntity<>(statsService.getStats(), HttpStatus.OK);
 	}
-	
+
 	@CrossOrigin
 	@RequestMapping(value = "/byId/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Stats> getStatsByUser(@PathVariable int id) {
@@ -46,7 +48,7 @@ public class StatsController {
 		resp = new ResponseEntity<>(stat, HttpStatus.OK);
 		return resp;
 	}
-	
+
 	@CrossOrigin
 	@RequestMapping(value = "/byUsername/{username}", method = RequestMethod.GET)
 	public ResponseEntity<Stats> getStatsByUserName(@PathVariable String username) {
@@ -55,20 +57,20 @@ public class StatsController {
 		resp = new ResponseEntity<>(stat, HttpStatus.OK);
 		return resp;
 	}
-	
+
 	@CrossOrigin
 	@RequestMapping(value = "/session", method = RequestMethod.GET)
 	public ResponseEntity<Stats> getStatsForSession(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		// Get current session
-		HttpSession session = request.getSession(false);
-		String username = (String) session.getAttribute("username");
-		
+		httpSession = request.getSession(false);
+		String username = (String) httpSession.getAttribute("username");
+
 		ResponseEntity<Stats> resp = null;
 		Stats stat = statsService.getStatsByUsername(username);
 		resp = new ResponseEntity<>(stat, HttpStatus.OK);
 		return resp;
 	}
-	
+
 }
