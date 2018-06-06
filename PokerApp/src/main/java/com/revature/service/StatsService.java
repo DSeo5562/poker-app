@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.revature.beans.CurrentHands;
 import com.revature.beans.Stats;
+import com.revature.beans.Users;
 import com.revature.repository.StatsRepository;
 
 @Service(value="statsService")
@@ -19,9 +19,8 @@ public class StatsService {
 		sr.addStat(st);
 	}
 	
-	public Stats getStatById(int id) {
-		Stats st = sr.getStatById(id);
-		return st;
+	public Stats getStatByUserId(int id) {
+		return sr.getStatByUserId(id);
 	}
 	
 	public List<Stats> getStats() {
