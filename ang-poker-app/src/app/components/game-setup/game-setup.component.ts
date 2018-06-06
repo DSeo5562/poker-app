@@ -1,8 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { FilterUsernamePipe } from '../../pipes/filter-username.pipe';
-import { UserProfileInfoService } from '../../services/user-profile-info.service';
+
+// models
 import { UserInfo } from '../../models/user-info.model';
 import { GameState } from '../../models/game-state.model';
+
+// services
+import { NavBarService } from '../../services/nav-bar.service';
+import { UserProfileInfoService } from '../../services/user-profile-info.service';
+
+// pipe
+import { FilterUsernamePipe } from '../../pipes/filter-username.pipe';
 
 @Component({
   selector: 'app-game-setup',
@@ -10,12 +17,11 @@ import { GameState } from '../../models/game-state.model';
   styleUrls: ['./game-setup.component.css']
 })
 export class GameSetupComponent implements OnInit {
-  // public users: any = ['Adele', 'Agnes', 'Billy', 'Bob', 'Calvin', 'Christina', 'Cindy'];
   public users: UserInfo;
 
   public friendsToInvite: string[] = [];
 
-  constructor(private userInfoService: UserProfileInfoService) { }
+  constructor(private userInfoService: UserProfileInfoService, public nav: NavBarService) { }
 
   getUserInformation(): void {
   this.userInfoService.fetchUserInformation()
@@ -28,6 +34,7 @@ export class GameSetupComponent implements OnInit {
 }
 
   ngOnInit() {
+    this.nav.show();
     this.getUserInformation();
   }
 

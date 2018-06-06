@@ -14,6 +14,6 @@ export class UserStatsService {
   constructor(private httpClient: HttpClient) { }
 
   public fetchStatsInformation(): Observable<Statistics> {
-    return this.httpClient.get<Statistics>('http://pokerapp.cfapps.io/stats/1');
+    return this.httpClient.get<Statistics>('https://pokerapp.cfapps.io/stats/session', {withCredentials: true});
   }
 }

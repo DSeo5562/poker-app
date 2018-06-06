@@ -1,7 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, Pipe, PipeTransform } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 // components
 import { AppComponent } from './app.component';
 import { RegisterComponent } from './components/register/register.component';
@@ -15,7 +16,6 @@ import { EditProfileComponent } from './components/edit-profile/edit-profile.com
 import { EditPasswordComponent } from './components/edit-password/edit-password.component';
 import { GameSetupComponent } from './components/game-setup/game-setup.component';
 import { FilterUsernamePipe } from './pipes/filter-username.pipe';
-
 
 @NgModule({
   declarations: [
@@ -35,6 +35,7 @@ import { FilterUsernamePipe } from './pipes/filter-username.pipe';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule
   ],
   exports: [ ],
   providers: [],

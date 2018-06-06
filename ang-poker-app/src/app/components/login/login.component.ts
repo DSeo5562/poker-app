@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+
+// services
+import { NavBarService } from '../../services/nav-bar.service';
 
 @Component({
   selector: 'app-login',
@@ -7,13 +11,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
+  loginForm: FormGroup;
+
   message: String = 'Logout Successful';
-  constructor() { }
+  constructor(private formBulder: FormBuilder, public nav: NavBarService) { }
 
   ngOnInit() {
-  }
-
-  submit() {
-    document.querySelector('form').submit();
+    this.nav.hide();
+    this.loginForm = this.formBulder.group({
+      username: [null, Validators.required],
+      password: [null, Validators.required]
+    });
   }
 }
