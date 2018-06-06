@@ -52,7 +52,11 @@ public class UsersController extends HttpServlet {
 	public String getStaticHelloPage() {
 		return "Hello";
 	}
+<<<<<<< HEAD
 
+=======
+	
+>>>>>>> 08c2e2ba818c180769701301edb59dfe323de998
 	@CrossOrigin
 	@RequestMapping(value = "/{username}", method = RequestMethod.GET)
 	public ResponseEntity<Users> getUsersByUserName(@PathVariable String username) {
