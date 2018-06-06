@@ -1,7 +1,5 @@
 package com.revature.requestHelper;
 
-import java.util.List;
-
 import com.revature.beans.Users;
 
 public class UserLogin {
@@ -26,13 +24,13 @@ public class UserLogin {
 	public static String checkLogin(Users user, String password) {
 		if(user == null) {
 			System.out.println("No User Exists!");
-			return "forward:/login";
+			return "forward:localhost:4200/login";
 		} else if(user.getPassword().equals(password)) {
 			System.out.println("User login works!");
-			return "forward/homepage";
+			return "forward:localhost:4200/home";
 		} else {
 			System.out.println("Incorrect password");
-			return "forward:/login";
+			return "forward:localhost:4200/login";
 		}
 	}
 }
