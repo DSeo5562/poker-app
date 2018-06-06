@@ -24,6 +24,7 @@ public class UsersRepository {
 	public int addUser(Users u) {
 		Session s = sessionFactory.getCurrentSession();
 		int result = (int) s.save(u);
+		System.out.println(result);
 		return result;
 	}
 
