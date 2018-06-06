@@ -35,5 +35,9 @@ public class UsersService {
 	public void deleteUser(Users u) {
 		ur.deleteUser(u);
 	}
+	
+	public List<Users> getUsersWithGameId (int id) {
+		return ur.getUsersWithGameId(id);
+	}
 
 }

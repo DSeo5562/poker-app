@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.revature.beans.GameStates;
 import com.revature.beans.Users;
 
 @Repository(value="usersRepository")
@@ -21,8 +22,18 @@ public class UsersRepository {
 	@Autowired
 	SessionFactory sessionFactory;
 	
+	@Autowired
+	GameStatesRepository gr;
+	
 	public int addUser(Users u) {
 		Session s = sessionFactory.getCurrentSession();
+		
+		// Adds an empty game state
+		GameStates g = new GameStates("",0,0,0,0,"");
+		gr.addGameState(g);
+		
+		u.setGameStates(g);
+		
 		int result = (int) s.save(u);
 		return result;
 	}
@@ -54,6 +65,17 @@ public class UsersRepository {
 		s.delete(u);
 		tx.commit();
 		s.close();
+	}
+	
+	public List<Users> getUsersWithGameId (int id) {
+		List<Users> users = this.getAllUsers();
+		List<Users> usersInGame = new ArrayList<>();
+		for(Users u : users) {
+			if(u.getGameStates().getGame_Id() == id) {
+				usersInGame.add(u);
+			}
+		}
+		return usersInGame;
 	}
 
 }
