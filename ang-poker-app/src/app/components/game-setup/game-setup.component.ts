@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 
 // models
 import { UserInfo } from '../../models/user-info.model';
@@ -18,10 +19,11 @@ import { FilterUsernamePipe } from '../../pipes/filter-username.pipe';
 })
 export class GameSetupComponent implements OnInit {
   public users: UserInfo;
+  public inviteFriendsForm: FormGroup;
 
   public friendsToInvite: string[] = [];
 
-  constructor(private userInfoService: UserProfileInfoService, public nav: NavBarService) { }
+  constructor(private userInfoService: UserProfileInfoService, private formBulder: FormBuilder, public nav: NavBarService) { }
 
   getUserInformation(): void {
   this.userInfoService.fetchUserInformation()
@@ -36,6 +38,10 @@ export class GameSetupComponent implements OnInit {
   ngOnInit() {
     this.nav.show();
     this.getUserInformation();
+    this.inviteFriendsForm = this.formBulder.group({
+      // friendsToInvite: [null, Validators.required],
+      timeLimit: [null, Validators.required]
+    });
   }
 
   public addFriendsToArr(user: UserInfo) {
