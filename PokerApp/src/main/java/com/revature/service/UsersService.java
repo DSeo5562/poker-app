@@ -28,12 +28,21 @@ public class UsersService {
 		return users;
 	}
 	
+	public Users getUserByUsername(String username) {
+		Users u = ur.getUserByUsername(username);
+		return u;
+	}
+	
 	public void updateUser(Users u) {
 		ur.updateUser(u);
 	}
 	
 	public void deleteUser(Users u) {
 		ur.deleteUser(u);
+	}
+	
+	public List<Users> getUsersWithGameId (int id) {
+		return ur.getUsersWithGameId(id);
 	}
 
 }

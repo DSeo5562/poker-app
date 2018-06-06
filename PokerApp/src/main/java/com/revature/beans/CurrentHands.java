@@ -34,7 +34,7 @@ public class CurrentHands implements Serializable{
 	
 	@Id
 	
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "USER_ID")
 	private Users user;
 	

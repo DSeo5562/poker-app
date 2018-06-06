@@ -3,15 +3,19 @@ package com.revature.repository;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.revature.beans.CurrentHands;
 import com.revature.beans.Stats;
+import com.revature.beans.Users;
 
 @Repository(value="statsRepository")
 @Transactional
@@ -21,16 +25,29 @@ public class StatsRepository {
 	@Autowired
 	SessionFactory sessionFactory;
 	
+	@Autowired
+	UsersRepository ur;
+	
 	public int addStat(Stats st) {
 		Session s = sessionFactory.getCurrentSession();
 		int result = (int) s.save(st);
 		return result;
 	}
 
-	public Stats getStatById(int id) {
+	public Stats getStatByUserId(int id) {
 		Session s = sessionFactory.getCurrentSession();
-		Stats st = (Stats) s.get(Stats.class, id);
-		return st;
+		
+		Users user = ur.getUserById(id);
+		Stats stat = (Stats) s.createCriteria(Stats.class).add(Restrictions.eq("user", user)).uniqueResult();	 
+	
+		return stat;
+	}
+	
+	public Stats getStatsByUsername(String username) {
+		Session s = sessionFactory.getCurrentSession();	
+		Users user = ur.getUserByUsername(username);
+		Stats stat = (Stats) s.createCriteria(Stats.class).add(Restrictions.eq("user", user)).uniqueResult();	
+		return stat;
 	}
 
 	public List<Stats> getStats() {
