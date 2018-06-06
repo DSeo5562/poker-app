@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.revature.beans.Users;
 import com.revature.requestHelper.UserLogin;
@@ -60,8 +61,7 @@ public class UsersController {
 	
 	@CrossOrigin
 	@RequestMapping(value="/login", method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-    @ResponseStatus(HttpStatus.OK)
-	public String handleLogin(@RequestBody MultiValueMap<String, String> formParams) {
+	public RedirectView handleLogin(@RequestBody MultiValueMap<String, String> formParams) {
 		System.out.println("form params received " + formParams);
 
 		String username = formParams.getFirst("username");
@@ -73,7 +73,11 @@ public class UsersController {
 		System.out.println(user);
 		
 		String dest = UserLogin.checkLogin(user, password);
-		return dest;
+		
+		RedirectView redirectView = new RedirectView();
+		redirectView.setUrl(dest);
+		System.out.println(dest);
+		return redirectView;
 	}
 
 	// to return bundled Angular app

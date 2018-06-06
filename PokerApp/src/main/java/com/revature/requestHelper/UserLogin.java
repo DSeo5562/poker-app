@@ -24,13 +24,13 @@ public class UserLogin {
 	public static String checkLogin(Users user, String password) {
 		if(user == null) {
 			System.out.println("No User Exists!");
-			return "forward:localhost:4200/login";
+			return "localhost:4200/login";
 		} else if(user.getPassword().equals(password)) {
 			System.out.println("User login works!");
-			return "forward:localhost:4200/home";
+			return "localhost:4200/home";
 		} else {
 			System.out.println("Incorrect password");
-			return "forward:localhost:4200/login";
+			return "localhost:4200/login";
 		}
 	}
 }
