@@ -9,11 +9,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.revature.beans.GameStates;
 import com.revature.beans.Users;
 import com.revature.requestHelper.UserLogin;
 import com.revature.service.UsersService;
@@ -41,7 +41,7 @@ public class UsersController {
 	}
 
 	@CrossOrigin
-	@GetMapping(value = "/login")
+	@PostMapping("/login")
 	public String handleLogin(@RequestBody MultiValueMap<String, String> formParams) {
 		System.out.println("form params received " + formParams);
 
