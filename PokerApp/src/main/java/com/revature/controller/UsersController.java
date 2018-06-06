@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,8 +25,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.revature.beans.GameStates;
 import com.revature.beans.Users;
+import com.revature.repository.GameStatesRepository;
 import com.revature.requestHelper.UserLogin;
+import com.revature.service.GameStatesService;
 import com.revature.service.UsersService;
 
 @Controller("usersController")
@@ -42,6 +44,9 @@ public class UsersController extends HttpServlet {
 	
 	@Autowired
 	private HttpSession httpSession;
+	
+	@Autowired
+	private GameStatesService gameStatesService;
 
 	@CrossOrigin
 	@GetMapping("/all")
@@ -79,26 +84,38 @@ public class UsersController extends HttpServlet {
 		resp = new ResponseEntity<>(user, HttpStatus.OK);
 		return resp;
 	}
+	
+	@CrossOrigin
+	@RequestMapping(value = "/invite", method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+	public RedirectView getUsersInvitedToGame(@RequestBody MultiValueMap<String, String> formParams, HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("form params received " + formParams);
 
-	// @CrossOrigin
-	// @PostMapping("/login")
-	// public String handleLogin(@RequestBody MultiValueMap<String, String>
-	// formParams) {
-	// System.out.println("form params received " + formParams);
-	//
-	// String username = formParams.getFirst("username");
-	// String password = formParams.getFirst("password");
-	// List<Users> u = usersService.getAllUsers();
-	//
-	// System.out.println(username + " is trying to login with password:" +
-	// password);
-	//
-	// String destination = ul.checkLogin(username, password, u);
-	//
-	// System.out.println(destination);
-	//
-	// return destination;
-	// }
+		String u = formParams.getFirst("users");
+		String timeStr = formParams.getFirst("time");
+		int time = Integer.valueOf(timeStr);
+		
+		// 1) Create Game blank game
+		// 3) Set Game in each user
+		
+//		public GameStates(String deckState, int currentTurn, int pot, int status, int timeLeft, String tableState)
+		
+		GameStates g = new GameStates("",0,0,0,time,"");	
+		gameStatesService.addGameState(g);
+
+		String[] users = u.split(",");
+		
+		for(String user : users) {
+			Users uSer = usersService.getUserByUsername(user);
+			uSer.setGameStates(g);
+			usersService.updateUser(uSer);
+		}
+
+		RedirectView redirectView = new RedirectView();
+		redirectView.setUrl("URL OF GAME");
+		
+		return redirectView;
+	}
 
 	@CrossOrigin
 	@RequestMapping(value = "/login", method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
@@ -122,10 +139,6 @@ public class UsersController extends HttpServlet {
 		// If the user successfully logs in
 		httpSession = request.getSession();	
 		httpSession.setAttribute("username", username);
-		
-//		if (dest.equals("http://localhost:4200/home/")){
-//			httpSession.setAttribute("username", username);
-//		}
 		
 		return redirectView;
 	}

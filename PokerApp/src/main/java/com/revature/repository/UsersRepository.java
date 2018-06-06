@@ -73,9 +73,9 @@ public class UsersRepository {
 		s.close();
 	}
 
-	public List<Users> getUsersWithGameId(int id) {
+	public ArrayList<Users> getUsersWithGameId(int id) {
 		List<Users> users = this.getAllUsers();
-		List<Users> usersInGame = new ArrayList<>();
+		ArrayList<Users> usersInGame = new ArrayList<>();
 		for (Users u : users) {
 			if (u.getGameStates().getGame_Id() == id) {
 				usersInGame.add(u);

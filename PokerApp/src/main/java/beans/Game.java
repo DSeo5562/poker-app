@@ -82,7 +82,7 @@ public class Game {
 	}
 	
 	private void initGameState() {
-		GameStates game = gameStatesService.getGameStateById(gameId);
+		GameStates game = gameStatesService.getGameStatesById(gameId);
 		game.setCurrentTurn(0);
 		game.setDeckState(Deck.shuffleDeck());
 		game.setPot(0);
@@ -159,7 +159,7 @@ public class Game {
 	}
 	
 	private void persistWinnings(ArrayList<CurrentHands> winners) {
-		GameStates game = gameStatesService.getGameStateById(gameId);
+		GameStates game = gameStatesService.getGameStatesById(gameId);
 		int winnings = game.getPot();
 		int winningsDivided = (int) (winnings / winners.size());
 		
@@ -170,7 +170,7 @@ public class Game {
 	}
 	
 	public void dealToPlayers() {
-		GameStates game = gameStatesService.getGameStateById(gameId);
+		GameStates game = gameStatesService.getGameStatesById(gameId);
 		String deckState = game.getDeckState();
 		
 		for (CurrentHands c: playerHands) {
@@ -184,7 +184,7 @@ public class Game {
 	}
 	
 	public void dealFlop() {
-		GameStates game = gameStatesService.getGameStateById(gameId);
+		GameStates game = gameStatesService.getGameStatesById(gameId);
 		String deckState = game.getDeckState();
 		
 		game.setTableState(deckState.substring(0, 8));
@@ -192,7 +192,7 @@ public class Game {
 	}
 	
 	public void dealTurn() {
-		GameStates game = gameStatesService.getGameStateById(gameId);
+		GameStates game = gameStatesService.getGameStatesById(gameId);
 		String deckState = game.getDeckState();
 		String tableState = game.getTableState();
 		
@@ -201,7 +201,7 @@ public class Game {
 	}
 	
 	public void dealRiver() {
-		GameStates game = gameStatesService.getGameStateById(gameId);
+		GameStates game = gameStatesService.getGameStatesById(gameId);
 		String deckState = game.getDeckState();
 		String tableState = game.getTableState();
 		
@@ -214,7 +214,7 @@ public class Game {
 			
 			c = currentHandsService.getCurrentHandById(c.getUser().getuserId());
 			if (!c.isHasFolded()) {
-				GameStates g = gameStatesService.getGameStateById(gameId);
+				GameStates g = gameStatesService.getGameStatesById(gameId);
 				g.setCurrentTurn(c.getPlayerOrder());
 				askPlayer(c);
 			}
@@ -227,7 +227,7 @@ public class Game {
 	public void askPlayer(CurrentHands c) {
 		int currentTurn = 0;
 		do {
-			GameStates g = gameStatesService.getGameStateById(gameId);
+			GameStates g = gameStatesService.getGameStatesById(gameId);
 			currentTurn = g.getCurrentTurn();
 			
 			try {
@@ -264,7 +264,7 @@ public class Game {
 		ArrayList<CurrentHands> winner = new ArrayList<>();
 		for (CurrentHands c : playerHands) {
 			if (!c.isHasFolded()) {
-				int score = determinePlayerBestHand(c.getHand());
+				int score = determinePlayerBestHand(c.getHand(), gameStatesService.getGameStatesById(gameId).getTableState());
 				if (score > maxScore) {
 					winner.clear();
 					winner.add(c);
@@ -277,7 +277,7 @@ public class Game {
 		return winner;
 	}
 	
-	public int determinePlayerBestHand(String hand) {
+	public int determinePlayerBestHand(String hand, String communityCards) {
 		String[] h = hand.split(" ");
 		ArrayList<String> userHand = new ArrayList<>();
 		userHand.add(h[0]);
@@ -286,8 +286,7 @@ public class Game {
 		ArrayList<String> possibleHand = new ArrayList<>();
 		possibleHand.addAll(userHand);
 		
-		GameStates g = gameStatesService.getGameStateById(gameId);
-		h = g.getTableState().split(" ");
+		h = communityCards.split(" ");
 		possibleHand.add(h[0]);
 		possibleHand.add(h[1]);
 		possibleHand.add(h[2]);

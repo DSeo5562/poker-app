@@ -1,5 +1,6 @@
 package com.revature.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +42,7 @@ public class UsersService {
 		ur.deleteUser(u);
 	}
 	
-	public List<Users> getUsersWithGameId (int id) {
+	public ArrayList<Users> getUsersWithGameId(int id) {
 		return ur.getUsersWithGameId(id);
 	}
 

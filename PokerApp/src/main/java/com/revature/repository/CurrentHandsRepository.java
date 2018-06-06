@@ -35,8 +35,9 @@ public class CurrentHandsRepository {
 
 	public CurrentHands getCurrentHandById(int id) {
 		Session s = sessionFactory.getCurrentSession();
-		CurrentHands h = (CurrentHands) s.get(CurrentHands.class, id);
-		return h;
+		Users user = ur.getUserById(id);
+		CurrentHands currentHand = (CurrentHands) s.createCriteria(CurrentHands.class).add(Restrictions.eq("user", user)).uniqueResult();	
+		return currentHand;
 	}
 	
 	public CurrentHands getCurrentHandByUsername(String username) {
