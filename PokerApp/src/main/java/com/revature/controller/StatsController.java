@@ -1,6 +1,12 @@
 package com.revature.controller;
 
+import java.io.IOException;
 import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -44,6 +50,21 @@ public class StatsController {
 	@CrossOrigin
 	@RequestMapping(value = "/byUsername/{username}", method = RequestMethod.GET)
 	public ResponseEntity<Stats> getStatsByUserName(@PathVariable String username) {
+		ResponseEntity<Stats> resp = null;
+		Stats stat = statsService.getStatsByUsername(username);
+		resp = new ResponseEntity<>(stat, HttpStatus.OK);
+		return resp;
+	}
+	
+	@CrossOrigin
+	@RequestMapping(value = "/session", method = RequestMethod.GET)
+	public ResponseEntity<Stats> getStatsForSession(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		// Get current session
+		HttpSession session = request.getSession(false);
+		String username = (String) session.getAttribute("username");
+		
 		ResponseEntity<Stats> resp = null;
 		Stats stat = statsService.getStatsByUsername(username);
 		resp = new ResponseEntity<>(stat, HttpStatus.OK);

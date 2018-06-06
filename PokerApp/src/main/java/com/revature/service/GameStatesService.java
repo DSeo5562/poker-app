@@ -19,7 +19,7 @@ public class GameStatesService {
 		gr.addGameState(g);
 	}
 	
-	public GameStates getUserById(int id) {
+	public GameStates getGameStatesById(int id) {
 		GameStates g = gr.getGameStateById(id);
 		return g;
 	}
