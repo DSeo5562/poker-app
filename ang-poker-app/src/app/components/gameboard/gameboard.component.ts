@@ -64,13 +64,25 @@ export class GameboardComponent implements OnInit {
 
       // Update the data on the board currently
 
-      this.drawBoardBackground();
-      this.drawUserHand();
-      this.drawUserInfo();
-      this.drawBoard();
-      this.drawOtherPlayers();
+
     });
   }
+
+  sendAjaxGet(obj, url, func) {
+      const xhr = new XMLHttpRequest();
+
+      xhr.onreadystatechange = function() {
+        if (this.readyState === 4 && this.status === 200) {
+          obj.drawBoardBackground();
+          obj.drawUserHand();
+          obj.drawUserInfo();
+          obj.drawBoard();
+          obj.drawOtherPlayers();
+        }
+      };
+      xhr.open('GET', url, true);
+      xhr.send();
+    }
 
 
 
