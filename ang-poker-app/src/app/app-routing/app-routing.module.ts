@@ -13,6 +13,8 @@ import { EditProfileComponent } from '../components/edit-profile/edit-profile.co
 
 import { EditPasswordComponent } from '../components/edit-password/edit-password.component';
 
+import { GameSetupComponent } from '../components/game-setup/game-setup.component';
+
 const appRoutes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
@@ -20,7 +22,8 @@ const appRoutes: Routes = [
   { path: 'home', component: HomepageComponent },
   { path: 'profile', component: UserProfileComponent },
   { path: 'edit-email', component: EditProfileComponent },
-  { path: 'edit-password', component: EditPasswordComponent }
+  { path: 'edit-password', component: EditPasswordComponent },
+  { path: 'create-game', component: GameSetupComponent }
 
 ];
 
