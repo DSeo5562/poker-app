@@ -49,15 +49,17 @@ public class CurrentHandsController {
 	
 	@GetMapping("/getFullGameState/{userId}")
 	@ResponseBody
-	public ResponseEntity<FullGameState> getGameState(@RequestParam int userId) {
+	public ResponseEntity<FullGameState> getGameState(@PathVariable int userId) {
 		CurrentHands user = currentHandsService.getCurrentHandById(userId);
 		int gameId = user.getUser().getGameStates().getGame_Id();
 		List<Users> otherplayersUsers = usersService.getUsersWithGameId(gameId);
 		
 		List<CurrentHands> otherplayers = new ArrayList<>();
 		for(Users u : otherplayersUsers) {
-			otherplayers.add(currentHandsService.getCurrentHandByUsername(u.getUsername()));
-		}
+			if(u.getuserId() != user.getUser().getuserId()) {
+				otherplayers.add(currentHandsService.getCurrentHandByUsername(u.getUsername()));
+			}
+	}
 		
 		FullGameState game = new FullGameState(user,otherplayers,user.getUser().getGameStates().getTableState());
 			
