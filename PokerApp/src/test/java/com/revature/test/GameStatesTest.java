@@ -37,8 +37,7 @@ public class GameStatesTest {
 
 	@Test
 	public void testFindGameStatesById() {
-		GameStates g = gr.getGameStateById(1);
-		assertEquals(1, g.getGame_Id());
+		
 	}
 
 	@Test

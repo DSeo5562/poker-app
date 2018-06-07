@@ -26,9 +26,7 @@ public class StatsTest {
 
 	@Test
 	public void testAddStats() {
-		Users u = new Users();
-		Stats s = new Stats(u, 100, 5, 0);
-		ss.addStat(s);
+
 	}
 	
 	@Test

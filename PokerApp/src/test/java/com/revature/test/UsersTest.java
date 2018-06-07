@@ -29,10 +29,7 @@ public class UsersTest {
 	
 	@Test
 	public void testInsertUsers() {
-		GameStates g = new GameStates("", 0, 0, 0, 0, "");
-		Users u = new Users(g, "jm@gmail.com", "password", "JJ", "Mubang", "jm2018", false);
-		us.addUser(u);
-		assertNotNull(us.getUserByUsername("jm2018"));
+
 	}
 	
 	@Test
