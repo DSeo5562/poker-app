@@ -1,5 +1,6 @@
 package com.revature.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +16,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.revature.beans.CurrentHands;
-import com.revature.beans.Stats;
+import com.revature.beans.FullGameState;
 import com.revature.beans.Users;
 import com.revature.service.CurrentHandsService;
+import com.revature.service.UsersService;
 
 @Controller("currentHandsController")
 @RequestMapping("/currentHands")
@@ -25,6 +27,9 @@ public class CurrentHandsController {
 
 	@Autowired
 	private CurrentHandsService currentHandsService;
+	
+	@Autowired
+	private UsersService usersService;
 
 	@GetMapping("/all")
 	@ResponseBody
@@ -42,25 +47,23 @@ public class CurrentHandsController {
 	}
 	
 	
-	@GetMapping("/getGameState/{userId}")
+	@GetMapping("/getFullGameState/{userId}")
 	@ResponseBody
-	public ResponseEntity<String> getGameState(@RequestParam int userId) {
-		CurrentHands c = currentHandsService.getCurrentHandById(userId);
+	public ResponseEntity<FullGameState> getGameState(@RequestParam int userId) {
+		CurrentHands user = currentHandsService.getCurrentHandById(userId);
+		int gameId = user.getUser().getGameStates().getGame_Id();
+		List<Users> otherplayersUsers = usersService.getUsersWithGameId(gameId);
 		
-		StringBuilder s = new StringBuilder();
-		s.append("{ \"user\" : ");
-		s.append(c)
+		List<CurrentHands> otherplayers = new ArrayList<>();
+		for(Users u : otherplayersUsers) {
+			otherplayers.add(currentHandsService.getCurrentHandByUsername(u.getUsername()));
+		}
 		
-		
-		
-		return new ResponseEntity<>(currentHandsService.getCurrentHands(), HttpStatus.OK);
+		FullGameState game = new FullGameState(user,otherplayers,user.getUser().getGameStates().getTableState());
+			
+		return new ResponseEntity<>(game, HttpStatus.OK);
 	}
 }
-
-{
-	"user" : {"username" : "username", "status" : "status", ...}
-}
-
 
 
 
