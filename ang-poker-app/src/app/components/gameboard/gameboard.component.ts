@@ -61,18 +61,32 @@ export class GameboardComponent implements OnInit {
 
   refreshBoard() {
     setInterval(1000, () => {
-
-      // Update the data on the board currently
-
-
+      let url: string = "a";
+      this.sendAjaxGet(this, url, )
     });
   }
 
-  sendAjaxGet(obj, url, func) {
+  sendAjaxGet(obj: GameboardComponent, url: string): void {
       const xhr = new XMLHttpRequest();
 
       xhr.onreadystatechange = function() {
         if (this.readyState === 4 && this.status === 200) {
+          let response = JSON.parse(xhr.responseText);
+          
+          let newUser = new Player(response.user.username, response.user.status, 
+                                   response.user.winnings, response.user.hand);
+          obj.user = newUser;
+         
+          let players = response.players;
+          let p = [];
+          for(let i = 0; i < players.length; i++) {
+            p.push(new Player(players[i].username, players[i].status, players[i].winnings, players[i].hand));
+          }
+          obj.otherPlayers = p;
+          
+          let boardCards = response.boardCards;
+          obj.board = boardCards;
+
           obj.drawBoardBackground();
           obj.drawUserHand();
           obj.drawUserInfo();
@@ -83,8 +97,6 @@ export class GameboardComponent implements OnInit {
       xhr.open('GET', url, true);
       xhr.send();
     }
-
-
 
   /* Sets the Canvas for the Gameboard; also sets the sizing for gameboard elements.
    */

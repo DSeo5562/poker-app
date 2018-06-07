@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.revature.beans.CurrentHands;
@@ -40,4 +41,36 @@ public class CurrentHandsController {
 		return resp;
 	}
 	
+	
+	@GetMapping("/getGameState/{userId}")
+	@ResponseBody
+	public ResponseEntity<String> getGameState(@RequestParam int userId) {
+		CurrentHands c = currentHandsService.getCurrentHandById(userId);
+		
+		StringBuilder s = new StringBuilder();
+		s.append("{ \"user\" : ");
+		s.append(c)
+		
+		
+		
+		return new ResponseEntity<>(currentHandsService.getCurrentHands(), HttpStatus.OK);
+	}
 }
+
+{
+	"user" : {"username" : "username", "status" : "status", ...}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
