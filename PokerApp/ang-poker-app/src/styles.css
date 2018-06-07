@@ -1,0 +1,38 @@
+/* You can add global styles to this file, and also import other style files */
+
+body, html {
+  height: 100%
+}
+
+/* h1, div {
+  color: #C60314;
+} */
+
+.textOnBgColor {
+  color: #C60314;
+  /* font-family: 'Limelight', cursive;
+  font-family: 'Shrikhand', cursive; */
+  font-family: 'Rye', cursive;
+}
+
+.centerBox {
+  /* margin:0px auto; */
+  margin:auto;
+position:relative;
+}
+
+/* #titleBox {
+  text-align: center;
+} */
+
+.bg {
+   /* background-image: url("../../assets/images/pokerAppBackground.jpg"); */
+   background-image: url("assets/images/pokerAppBackground.jpg");
+   /* Full height */
+   height: 100%;
+
+   /* Center and scale the image nicely */
+   background-position: center;
+   background-repeat: no-repeat;
+   background-size: cover;
+}
