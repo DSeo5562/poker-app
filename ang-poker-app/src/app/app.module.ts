@@ -14,8 +14,10 @@ import { HomepageComponent } from './components/homepage/homepage.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 import { EditPasswordComponent } from './components/edit-password/edit-password.component';
+import { GameboardComponent } from './components/gameboard/gameboard.component';
 import { GameSetupComponent } from './components/game-setup/game-setup.component';
 import { FilterUsernamePipe } from './pipes/filter-username.pipe';
+
 
 @NgModule({
   declarations: [
@@ -29,6 +31,7 @@ import { FilterUsernamePipe } from './pipes/filter-username.pipe';
     EditPasswordComponent,
     GameSetupComponent,
     FilterUsernamePipe,
+    GameboardComponent,
   ],
   imports: [
     BrowserModule,
