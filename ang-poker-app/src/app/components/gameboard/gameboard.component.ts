@@ -71,10 +71,10 @@ export class GameboardComponent implements OnInit {
     this.refreshBoard();
   }
   refreshBoard() {
-    setInterval(1000, () => {
+    setInterval(() => {
       const url: string = "https://pokerapp.cfapps.io/currentHands/getFullGameState/" + this.userInfo.user.userId;
       this.sendAjaxGet(this, url)
-    })
+    }, 10000);
 
   }
 
@@ -84,15 +84,15 @@ export class GameboardComponent implements OnInit {
       xhr.onreadystatechange = function() {
         if (this.readyState === 4 && this.status === 200) {
           let response = JSON.parse(xhr.responseText);
-
-          let newUser = new Player(response.user.username, response.user.status,
+          console.log(response);
+          let newUser = new Player(response.user.user.username, response.user.status,
                                    response.user.winnings, response.user.hand.split(' '));
           obj.user = newUser;
 
-          let players = response.players;
+          let players = response.otherPlayers;
           let p = [];
           for (let i = 0; i < players.length; i++) {
-            p.push(new Player(players[i].username, players[i].status, players[i].winnings, players[i].hand.split(' ')));
+            p.push(new Player(players[i].user.username, players[i].status, players[i].winnings, players[i].hand.split(' ')));
           }
           obj.otherPlayers = p;
 

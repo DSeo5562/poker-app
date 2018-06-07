@@ -3,6 +3,7 @@ import { UserStatsService } from '../../services/user-stats.service';
 import { GameState } from '../../models/game-state.model';
 import { Statistics } from '../../models/statistics.model';
 import { UserInfo } from '../../models/user-info.model';
+import { NavBarService } from '../../services/nav-bar.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -15,7 +16,7 @@ export class UserProfileComponent implements OnInit {
   public gameState: GameState = null;
   public userInfo: Statistics;
 
-  constructor(private userStatsService: UserStatsService) { }
+  constructor(private userStatsService: UserStatsService, public nav: NavBarService) { }
 
   getUserInformation(): void {
     this.userStatsService.fetchStatsInformation()
@@ -29,6 +30,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.nav.show();
     this.getUserInformation();
   }
 
