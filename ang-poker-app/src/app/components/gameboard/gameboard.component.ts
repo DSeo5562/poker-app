@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavBarService } from '../../services/nav-bar.service';
+import { Statistics } from '../../models/statistics.model';
+import { UserStatsService } from '../../services/user-stats.service';
 
 import { Player } from '../../models/Player';
 
@@ -10,6 +12,9 @@ import { Player } from '../../models/Player';
 })
 
 export class GameboardComponent implements OnInit {
+
+  public userInfo: Statistics;
+
   private canvas: HTMLCanvasElement;
   private ctx: CanvasRenderingContext2D;
 
@@ -31,10 +36,14 @@ export class GameboardComponent implements OnInit {
 
   private pot: number;
 
-  constructor(public nav: NavBarService) {
+  constructor(public nav: NavBarService, private userStatsService: UserStatsService) {
   }
 
+  // userid: this.userInfo.user.userId
+
   ngOnInit() {
+
+    this.getUserInformation();
     this.nav.show();
 
     this.setCanvas(<HTMLCanvasElement> document.getElementById('thisCanvas'));
@@ -57,13 +66,16 @@ export class GameboardComponent implements OnInit {
               new Player("Jack77", "Check", "$1000", ["GC", "GC"]),
               new Player("Jack77", "Check", "$1000", ["BC", "BC"])];
     this.setOtherPlayers(p);
-    this.drawOtherPlayers();  }
+    this.drawOtherPlayers();
 
+    this.refreshBoard();
+  }
   refreshBoard() {
     setInterval(1000, () => {
-      let url: string = "a";
-      this.sendAjaxGet(this, url, )
-    });
+      const url: string = "https://pokerapp.cfapps.io/currentHands/getFullGameState/" + this.userInfo.user.userId;
+      this.sendAjaxGet(this, url)
+    })
+
   }
 
   sendAjaxGet(obj: GameboardComponent, url: string): void {
@@ -72,19 +84,19 @@ export class GameboardComponent implements OnInit {
       xhr.onreadystatechange = function() {
         if (this.readyState === 4 && this.status === 200) {
           let response = JSON.parse(xhr.responseText);
-          
-          let newUser = new Player(response.user.username, response.user.status, 
-                                   response.user.winnings, response.user.hand);
+
+          let newUser = new Player(response.user.username, response.user.status,
+                                   response.user.winnings, response.user.hand.split(' '));
           obj.user = newUser;
-         
+
           let players = response.players;
           let p = [];
-          for(let i = 0; i < players.length; i++) {
-            p.push(new Player(players[i].username, players[i].status, players[i].winnings, players[i].hand));
+          for (let i = 0; i < players.length; i++) {
+            p.push(new Player(players[i].username, players[i].status, players[i].winnings, players[i].hand.split(' ')));
           }
           obj.otherPlayers = p;
-          
-          let boardCards = response.boardCards;
+
+          let boardCards = response.tableState.split(' ');
           obj.board = boardCards;
 
           obj.drawBoardBackground();
@@ -97,6 +109,17 @@ export class GameboardComponent implements OnInit {
       xhr.open('GET', url, true);
       xhr.send();
     }
+
+    getUserInformation(): void {
+      this.userStatsService.fetchStatsInformation()
+        .subscribe(
+          (userInfo: Statistics) => {
+            this.userInfo = userInfo;
+            // console.log(this.userInfo);
+          },
+          error => { console.log(error); }
+        );
+      }
 
   /* Sets the Canvas for the Gameboard; also sets the sizing for gameboard elements.
    */

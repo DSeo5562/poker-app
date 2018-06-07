@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserStatsService } from '../../services/user-stats.service';
 import { GameState } from '../../models/game-state.model';
 import { Statistics } from '../../models/statistics.model';
+import { UserInfo } from '../../models/user-info.model';
 
 @Component({
   selector: 'app-user-profile',
